@@ -34,7 +34,6 @@ function bump(type) {
 }
 
 getParentBranch((branch) => {
-    console.trace()
     const fixRegex = new RegExp('^fix\\-|[^a-z]fix\\-', 'gim');
     const featureRegex = new RegExp('^feature\\-|[^a-z]feature\\-', 'gim');
 
