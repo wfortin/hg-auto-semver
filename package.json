@@ -1,6 +1,6 @@
 {
   "name": "hg-auto-semver",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automatically bump versions according to hg parent branch name.",
   "main": "index.js",
   "bin": {
