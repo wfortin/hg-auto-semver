@@ -1,15 +1,16 @@
 {
   "name": "hg-auto-semver",
   "version": "1.0.0",
-  "description": "",
+  "description": "Automatically bump versions according to hg parent branch name.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "bin": {
     "hg-auto-semver": "bin/cli.js"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wfortin/hg-auto-semver.git"
+  },
+  "author": "wfortin",
   "license": "MIT",
   "dependencies": {
     "npm": "^3.10.7"
