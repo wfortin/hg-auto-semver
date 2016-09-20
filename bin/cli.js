@@ -34,14 +34,16 @@ function bump(type) {
 }
 
 getParentBranch((branch) => {
-    const fixRegex = new RegExp('^fix\\-|[^a-z]fix\\-', 'gim');
-    const featureRegex = new RegExp('^feature\\-|[^a-z]feature\\-', 'gim');
+    if (branch) {
+        const fixRegex = new RegExp('^fix\\-|[^a-z]fix\\-', 'gim');
+        const featureRegex = new RegExp('^feature\\-|[^a-z]feature\\-', 'gim');
 
-    if (fixRegex.test(branch)) {
-        console.log('Branch name contains "fix-", bumping a PATCH version');
-        bump(Version.PATCH)
-    } else if (featureRegex.test(branch)) {
-        console.log('Branch name contains "feature-", bumping a MINOR version');
-        bump(Version.MINOR)
+        if (fixRegex.test(branch)) {
+            console.log('Branch name contains "fix-", bumping a PATCH version');
+            bump(Version.PATCH)
+        } else if (featureRegex.test(branch)) {
+            console.log('Branch name contains "feature-", bumping a MINOR version');
+            bump(Version.MINOR)
+        }
     }
 });
