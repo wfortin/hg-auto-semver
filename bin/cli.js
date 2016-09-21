@@ -14,12 +14,10 @@ function getParentBranch() {
 }
 
 function bump(type) {
-    execSync(`npm version ${type}`);
+    return execSync(`npm version ${type}`);
 }
 
-function publish() {
-    const version = require('./package.json').version;
-
+function publish(version) {
     execSync(`hg commit --config ui.username=jenkins@coveo.com -m 'Release v${version}'`);
     execSync(`hg tag --config ui.username=jenkins@coveo.com ${PACKAGE_VERSION} -f`);
 
@@ -40,12 +38,12 @@ try {
 
         if (fixRegex.test(branch)) {
             console.log('Branch name contains "fix-", bumping a PATCH version');
-            bump(Version.PATCH);
-            publish();
+            const version = bump(Version.PATCH);
+            publish(version);
         } else if (featureRegex.test(branch)) {
             console.log('Branch name contains "feature-", bumping a MINOR version');
-            bump(Version.MINOR);
-            publish();
+            const version = bump(Version.MINOR);
+            publish(version);
         }
     } else {
         console.log('No parent branch, exiting');
@@ -54,4 +52,3 @@ try {
     // We don't want our CI to have an error, just log it.
     console.log(err);
 }
-
