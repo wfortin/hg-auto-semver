@@ -18,11 +18,13 @@ function bump(type) {
 }
 
 function publish(version) {
+    console.log(process.env.HG_USR, process.env.HG_PWD, process.env.NPM_TOKEN);
+
     execSync(`hg commit --config ui.username=jenkins@coveo.com -m 'Release v${version}'`);
-    execSync(`hg tag --config ui.username=jenkins@coveo.com ${PACKAGE_VERSION} -f`);
+    execSync(`hg tag --config ui.username=jenkins@coveo.com ${version} -f`);
 
     execSync(`echo 'strict-ssl=false' > .npmrc`);
-    execSync(`echo '//npm.corp.coveo.com/:_authToken=${env.NPM_TOKEN}' >> .npmrc`);
+    execSync(`echo '//npm.corp.coveo.com/:_authToken=${process.env.NPM_TOKEN}' >> .npmrc`);
     execSync(`echo '@coveo:registry=https://npm.corp.coveo.com/' >> .npmrc`);
 
     execSync(`npm publish`);
