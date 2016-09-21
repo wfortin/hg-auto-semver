@@ -11,8 +11,5 @@
     "url": "https://github.com/wfortin/hg-auto-semver.git"
   },
   "author": "wfortin",
-  "license": "MIT",
-  "dependencies": {
-    "npm": "^3.10.7"
-  }
+  "license": "MIT"
 }
