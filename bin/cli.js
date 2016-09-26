@@ -33,11 +33,12 @@ function publish(version) {
 try {
     const branch = getParentBranch();
     if (branch) {
+        const releaseRegex = new RegExp('^release\\-', 'gim');
         const fixRegex = new RegExp('^fix\\-|[^a-z]fix\\-', 'gim');
         const featureRegex = new RegExp('^feature\\-|[^a-z]feature\\-', 'gim');
 
-        if (fixRegex.test(branch)) {
-            console.log('Branch name contains "fix-", bumping a PATCH version');
+        if (releaseRegex.test(branch) || fixRegex.test(branch)) {
+            console.log('Branch name contains "release-" or "fix-", bumping a PATCH version');
             const version = bump(Version.PATCH);
             publish(version);
         } else if (featureRegex.test(branch)) {
