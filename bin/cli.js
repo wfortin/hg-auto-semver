@@ -32,7 +32,8 @@ try {
             bump(Version.MINOR);
         }
     } else {
-        console.log('No parent branch, exiting');
+        console.log('No parent branch, bumping a patch');
+        bump(Version.PATCH);
     }
 } catch (err) {
     // We don't want our CI to have an error, just log it.
