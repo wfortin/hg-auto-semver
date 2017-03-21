@@ -19,20 +19,13 @@ function bump(type) {
 
 try {
     const branch = getParentBranch();
-    if (branch) {
-        const releaseRegex = new RegExp('^release\\-', 'gim');
-        const fixRegex = new RegExp('^fix\\-|[^a-z]fix\\-', 'gim');
-        const featureRegex = new RegExp('^feature\\-|[^a-z]feature\\-', 'gim');
+    const featureRegex = new RegExp('^feature\\-|[^a-z]feature\\-', 'gim');
 
-        if (releaseRegex.test(branch) || fixRegex.test(branch)) {
-            console.log('Branch name contains "release-" or "fix-", bumping a PATCH version');
-            bump(Version.PATCH);
-        } else if (featureRegex.test(branch)) {
-            console.log('Branch name contains "feature-", bumping a MINOR version');
-            bump(Version.MINOR);
-        }
+    if (branch && featureRegex.test(branch)) {
+        console.log('Branch name contains "feature-", bumping a MINOR version');
+        bump(Version.MINOR);
     } else {
-        console.log('No parent branch, bumping a patch');
+        console.log('Branch name doesn\'t contains "feature-", bumping a PATCH version');
         bump(Version.PATCH);
     }
 } catch (err) {
